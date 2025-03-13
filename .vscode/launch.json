@@ -1,0 +1,23 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "lldb",
+      "request": "launch",
+      "name": "Debug executable 'custom_traits'",
+      "cargo": {
+        "args": [
+          "build",
+          "--bin=custom_traits",
+          "--package=hello-rust"
+        ],
+        "filter": {
+          "name": "custom_traits",
+          "kind": "bin"
+        }
+      },
+      "args": [],
+      "cwd": "${workspaceFolder}"
+    }
+  ]
+}
