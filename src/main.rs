@@ -1,7 +1,40 @@
+mod geometry;
+mod try_unwrap;
+use try_unwrap::coba_unwrap as cu;
+
+mod try_expect;
+use try_expect::coba_expect as ce;
+
+mod try_error;
+use try_error::read_file;
+
 use ferris_says::say;
-use std::{collections::btree_map::Keys, io::{stdout, BufWriter, Stdout}};
+use std::{
+    collections::btree_map::Keys,
+    io::{stdout, BufWriter, Stdout},
+};
+
+use geometry::shapes::Rectangle;
+use geometry::utils::distance;
+use rand::Rng;
 
 fn main() {
+    // try error
+    let result = read_file("example.txt");
+    match result {
+        Ok(content) => println!("File content: {}", content),
+        Err(error) => eprintln!("Error: {}", error),
+    }
+
+    // coba unwrap
+    cu();
+    ce();
+
+    // random
+    let mut rng = rand::rng();
+    let random_number = rng.random_range(1..9);
+    println!("Random number: {}", random_number);
+
     // local variables
     let message = String::from("Hello");
     let mut writer = String::new();
@@ -10,7 +43,7 @@ fn main() {
     test_tuple();
     test_vector();
     test_match();
-    
+
     test_option();
     let result_fn_option = fn_option(vec![1, 2, 3, 4, 5], 3);
     match result_fn_option {
@@ -32,23 +65,29 @@ fn main() {
     print_message(&message);
     append_message(&mut writer, &message);
     println!("Writer: {}", writer);
-    
+
     let numbers = vec![1, 2, 3, 4, 5];
     let result = find_number(numbers, 3);
     match result {
         Some(number) => println!("Found number: {}", number),
         None => println!("Number not found"),
-        
     }
+
+    let rect = Rectangle::new(10.0, 20.0);
+    println!("Area: {}", rect.area());
+
+    let dist = distance(1.0, 2.0, 3.0, 4.0);
+    println!("Distance: {}", dist);
 }
 
 fn fn_option(numbers: Vec<i32>, target: i32) -> Option<i32> {
-    for &number in &numbers { // this is a reference to the number so that we don't take ownership of the number
+    for &number in &numbers {
+        // this is a reference to the number so that we don't take ownership of the number
         if number == target {
             return Some(number);
         }
     }
-    None        // return None if the number is not found
+    None // return None if the number is not found
 }
 
 fn fn_result(a: i32, b: i32) -> Result<i32, String> {
@@ -79,7 +118,7 @@ fn test_option() {
         Some(2) => println!("Two"),
         Some(3) => println!("Three"),
         Some(_) => println!("Some other number"), // Matches any other `Some` value
-        None => println!("None"), // Matches `None`
+        None => println!("None"),                 // Matches `None`
     }
 }
 
@@ -124,27 +163,30 @@ fn test_tuple() {
 }
 
 fn find_number(numbers: Vec<i32>, target: i32) -> Option<i32> {
-    for &number in &numbers { // this is a reference to the number so that we don't take ownership of the number
+    for &number in &numbers {
+        // this is a reference to the number so that we don't take ownership of the number
         if number == target {
             return Some(number);
         }
     }
-    None        // return None if the number is not found
+    None // return None if the number is not found
 }
 
 fn crustacean() {
-    let stdout:Stdout = stdout();
+    let stdout: Stdout = stdout();
     let message: String = String::from("HTS H nya apa, H nya HANCOK");
-    let width:usize  = message.chars().count();
+    let width: usize = message.chars().count();
     let mut writer = BufWriter::new(stdout.lock());
     say(&message, width, &mut writer).unwrap();
 }
 
-fn print_message(message: &String) { // &String means immutable reference to a String
+fn print_message(message: &String) {
+    // &String means immutable reference to a String
     println!("{}", message);
 }
 
-fn append_message(writer: &mut String, message: &String) { // &mut String means mutable reference to a String
+fn append_message(writer: &mut String, message: &String) {
+    // &mut String means mutable reference to a String
     writer.push_str(message);
 }
 
@@ -186,11 +228,13 @@ fn test_struct() {
     //     ..user1
     // };
 
-
     let point = Point { x: 3, y: 4 };
     println!("x: {}, y: {}", point.x, point.y);
     print!("User1: ");
-    println!("username: {}, email: {}, sign_in_count: {}, active: {}", user1.username, user1.email, user1.sign_in_count, user1.active);
+    println!(
+        "username: {}, email: {}, sign_in_count: {}, active: {}",
+        user1.username, user1.email, user1.sign_in_count, user1.active
+    );
     // print!("User2: ");
     // println!("username: {}, email: {}, sign_in_count: {}, active: {}", user2.username, user2.email, user2.sign_in_count, user2.active);
 }

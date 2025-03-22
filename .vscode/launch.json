@@ -4,15 +4,15 @@
     {
       "type": "lldb",
       "request": "launch",
-      "name": "Debug executable 'custom_traits'",
+      "name": "Debug executable 'main'",
       "cargo": {
         "args": [
           "build",
-          "--bin=custom_traits",
+          "--bin=main",
           "--package=hello-rust"
         ],
         "filter": {
-          "name": "custom_traits",
+          "name": "main",
           "kind": "bin"
         }
       },
