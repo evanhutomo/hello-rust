@@ -8,6 +8,12 @@ use try_expect::coba_expect as ce;
 mod try_error;
 use try_error::read_file;
 
+mod try_thread;
+use try_thread::coba_thread as ct;
+
+mod try_async;
+use try_async::run_async as ra;
+
 use ferris_says::say;
 use std::{
     collections::btree_map::Keys,
@@ -19,6 +25,12 @@ use geometry::utils::distance;
 use rand::Rng;
 
 fn main() {
+    // try async
+    ra();
+
+    // try thread
+    ct();
+
     // try error
     let result = read_file("example.txt");
     match result {
