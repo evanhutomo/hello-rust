@@ -7,6 +7,9 @@ edition = "2021"
 ferris-says = "0.3.1"
 rand = "0.9.1"
 tokio = { version = "1", features = ["full"] }
+reqwest = { version = "0.12.15", features = ["json", "default-tls"] }
+serde = { version = "1", features = ["derive"] }
+
 
 [[bin]]
 name = "main"

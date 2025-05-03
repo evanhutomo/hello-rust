@@ -12,7 +12,7 @@ mod try_thread;
 use try_thread::coba_thread as ct;
 
 mod try_async;
-use try_async::run_async as ra;
+use try_async::main as ra;
 
 use ferris_says::say;
 use std::{

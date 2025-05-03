@@ -20,17 +20,6 @@ command to list available binaries in the current project
 cargo run --bin
 
 
-Arc (Atomic Reference Counted Pointer)
-- Arc is a thread-safe reference-counting pointer. It allows multiple threads to own the same data, and it keeps track of how many references there are to that data. When the last reference is dropped, the data is deallocated.
-- Arc is used when you need to share data between threads and ensure that the data is not deallocated while it is still being used by other threads. It is a smart pointer that provides shared ownership of data.
-
-Mutex (Mutual Exclusion)
-- Mutex is a synchronization primitive that provides mutual exclusion, allowing only one thread to access the data at a time. It is used to protect shared data from being accessed by multiple threads simultaneously
-- Mutex is used when you need to ensure that only one thread can access a piece of data at a time. It is a synchronization primitive that provides mutual exclusion, allowing only one thread to access the data at a time.
-
-
-
-
 --------------------------------------------------------
 list of question 
 1. Can you give me a list of difference between mysql and graphql?
@@ -63,3 +52,9 @@ DB ORM
   Diesel
 
 FE Web Framework
+  Yew
+
+Crates that need to give a shot
+  clap
+  pier
+  
